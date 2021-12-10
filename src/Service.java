@@ -4,25 +4,27 @@ import java.util.List;
 
 public class Service implements Serializable {
     List<Phonebook> phonebooks = new ArrayList<>();
-    ReadAndWire readAndWire = new ReadAndWire();
 
-    public Service(){
-phonebooks = ReadAndWire.readPhoneBook();
+    public List<Phonebook> show() {
+        return phonebooks;
     }
 
-public void addPhone(Phonebook phonebook){
-    phonebooks.add(phonebook);
-    ReadAndWire.writePhonebook(phonebooks);
-}
+    public Service(){
 
+    }
+
+public void addPhone(Phonebook phonebook) {
+    phonebooks.add(phonebook);
+
+}
 public void edit(int index, Phonebook phonebook){
     phonebooks.set(index, phonebook);
-    ReadAndWire.writePhonebook(phonebooks);
+
 }
 
 public void delete(int index){
     phonebooks.remove(index);
-    ReadAndWire.writePhonebook(phonebooks);
+
 }
 
     public int findIndexByName(int phone) {
@@ -44,5 +46,9 @@ public void delete(int index){
                 System.out.println(phonebooks.get(i));
             }
         }
+    }
+    public void addList(Phonebook contact) {
+        phonebooks.add(contact);
+
     }
 }

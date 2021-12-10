@@ -3,34 +3,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadAndWire {
-    public static List<Phonebook> readPhoneBook() {
+    Service service = new Service();
+    public void realdFile() {
         try {
-            File file = new File("phonebook.csv");
-            if (!file.isFile()){
-                file.createNewFile();
+            FileReader fileReader = new FileReader("phonebook.txt");
+            BufferedReader br = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                String realdfile[] = line.split(" , ");
+                String number = realdfile[0];
+                String name = realdfile[1];
+                String gender = realdfile[2];
+                String address = realdfile[3];
+
+                Phonebook phonebook = new Phonebook(number, name, gender, address);
+                service.addList(phonebook);
+
             }
-            FileInputStream fileInputStream = new FileInputStream("phonebook.csv");
-            if (fileInputStream.available() != 0){
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                return (List<Phonebook>) objectInputStream.readObject();
-            }
-            return new ArrayList<>();
-        }
-        catch (Exception e){
+            System.out.println("đã  đọc file ");
+        } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
     }
 
-    public static void writePhonebook(List<Phonebook> list) {
+    public void writeToFile() {
+        List<Phonebook> list = service.show();
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("phonebook.csv");
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(list);
-            fileOutputStream.close();
-            objectOutputStream.close();
-        }
-        catch (Exception e){
+            FileWriter fileWriter = new FileWriter("phonebook.txt");
+            for (Phonebook st : list) {
+                fileWriter.write(st.toString() + " \n");
+            }
+            System.out.println("ghi file thành công");
+            fileWriter.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

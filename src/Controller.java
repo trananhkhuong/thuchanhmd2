@@ -5,6 +5,7 @@ public class Controller {
 public static void Menu(){
     Service service = new Service();
     View view = new View();
+    ReadAndWire readAndWire = new ReadAndWire();
     while (true){
         int choice = view.Menu();
         switch (choice){
@@ -30,6 +31,12 @@ public static void Menu(){
                 service.search(view.Phone());
                 break;
             case 6:
+                readAndWire.realdFile();
+                break;
+            case 7:
+                readAndWire.writeToFile();
+                break;
+            case 8:
                 System.exit(0);
                 break;
             default:

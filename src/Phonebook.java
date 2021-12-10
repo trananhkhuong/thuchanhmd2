@@ -6,7 +6,7 @@ public class Phonebook implements Serializable {
     private String gender;
     private String address;
 
-    public Phonebook() {
+    public Phonebook(String number, String name, String gender, String address) {
     }
 
     public Phonebook(int number, String name, String gender, String address) {
